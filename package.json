@@ -10,7 +10,8 @@
   "keywords": [
     "gatsby",
     "svg",
-    "react"
+    "react",
+    "gatsby-plugin"
   ],
   "author": "Jacob Mischka <jacob@mischka.me>",
   "license": "MIT",
