@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-react-svg",
-  "version": "1.1.1",
+  "version": "2.0.0-beta1",
   "description": "Adds svg-react-loader to gatsby webpack config.",
   "main": "gatsby-node.js",
   "repository": {
@@ -14,6 +14,9 @@
     "gatsby-plugin"
   ],
   "author": "Jacob Mischka <jacob@mischka.me>",
+  "contributors": [
+    "Aaron Lampros (https://github.com/alampros)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jacobmischka/gatsby-plugin-react-svg/issues"

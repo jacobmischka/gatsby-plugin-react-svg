@@ -1,43 +1,50 @@
-exports.modifyWebpackConfig = ({config, stage}, pluginOptions) => {
-	if ([
+exports.onCreateWebpackConfig = ({
+	stage, actions, getConfig, rules
+}, { rule: ruleProps = {} }) => {
+	const { include, exclude } = ruleProps
+
+	if([
 		'develop',
 		'develop-html',
 		'build-html',
 		'build-javascript'
 	].includes(stage)) {
-		const { include, exclude } = pluginOptions;
-
-		// Remove svg from url-loader config
-		config.loader('url-loader', {
-			test: /\.(jpg|jpeg|png|gif|mp4|webm|wav|mp3|m4a|aac|oga)(\?.*)?$/,
-			loader: 'url-loader',
-			query: {
-				limit: 10000,
-				name: `static/[name].[hash:8].[ext]`,
+		// Add the svg-react-loader rule
+		actions.setWebpackConfig({
+			module: {
+				rules: [
+					{
+						use: 'svg-react-loader',
+						test: /\.svg$/,
+						...ruleProps,
+					}
+				],
 			}
-		});
-		
-		// Readd url-loader if in/excludes are specified
-		if (include || exclude) {
-			config.loader('url-loader-svg', {
-				test: /\.svg$/,
-				loader: 'url-loader',
-				query: {
-					limit: 10000,
-					name: `static/[name].[hash:8].[ext]`,
-				},
-				include: exclude,
-				exclude: include
-			});			
-		}
-		
-		config.loader('svg-react-loader', {
-			test: /\.svg$/,
-			loader: 'svg-react-loader',
-			include,
-			exclude
-		});
-	}
+		})
+		const cfg = getConfig()
+		const imgsRule = rules.images()
 
-	return config;
+		const newUrlLoaderRule = (include || exclude) ? {
+			...imgsRule,
+			include: exclude,
+			exclude: include
+		} : {
+			...imgsRule,
+			test: new RegExp(imgsRule.test.toString().replace('svg|', '').slice(1, -1))
+		}
+
+		cfg.module.rules = [
+			// Remove the base url-loader images rule entirely
+			...cfg.module.rules.filter(rule => {
+				if(rule.test) {
+					return rule.test.toString() !== imgsRule.test.toString()
+				}
+				return true
+			}),
+			// Put it back without SVG loading
+			newUrlLoaderRule
+		]
+		actions.replaceWebpackConfig(cfg)
+	}
 }
+
