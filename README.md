@@ -1,4 +1,4 @@
-**Note**: A version compatible with Gatsby v2 is published on npm under the `next` tag. Please install via `gatsby-plugin-react-svg@next` if you're using Gatsby v2 before its stable release.
+**Note**: A version compatible with Gatsby v2 is published on npm under the `next` tag. Please install via `gatsby-plugin-react-svg@next` if you're using Gatsby v2 before its stable release. Please see [#5](https://github.com/jacobmischka/gatsby-plugin-react-svg/pull/5) for further details.
 
 Adds [`svg-react-loader`][loader] to gatsby webpack config (and removes `svg`s from the built-in `url-loader` config).
 
