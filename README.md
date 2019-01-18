@@ -16,3 +16,14 @@ The following uses `svg-react-loader` to process svgs from a path matching `/ass
 ```
 
 [loader]: https://github.com/jhamlet/svg-react-loader
+
+From now on you can import SVGs and add them as Components:
+
+
+```js
+import Icon from './path/icon.svg';
+
+// ...
+
+<Icon />
+```
