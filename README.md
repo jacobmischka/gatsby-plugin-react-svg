@@ -2,7 +2,7 @@
 
 Adds [`svg-react-loader`](https://github.com/jhamlet/svg-react-loader) to gatsby webpack config.
 
-> **Note**: the plugin can **remove `SVG`s from the built-in `url-loader` config** in case invlaid configuration.
+> **Note**: the plugin can **remove `SVG`s from the built-in `url-loader` config** in case invalid configuration.
 
 ## Install
 
