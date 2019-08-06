@@ -27,7 +27,7 @@ plugins: [
 
 ## Configuration
 
-The `rule` plugin option can be used to pass [rule options](https://webpack.js.org/configuration/module/#rule). If either `include` or `exclude` options are present, `svg-react-loader` will use them and `url-loader` will be reenabled with the inverse.
+The `rule` plugin option can be used to pass [rule options](https://webpack.js.org/configuration/module/#rule). If either `include` or `exclude` options are present, `svg-react-loader` will use them and `url-loader` will be re-enabled with the inverse.
 
 The following configuration uses `svg-react-loader` to process SVGs from a path matching `/assets/`, and `url-loader` to process SVGs from everywhere else.
 
@@ -96,7 +96,7 @@ InvalidCharacterError: Failed to execute 'createElement' on 'Document':
 The tag name provided ('data:image/svg+xml; ...
 ```
 
-It's likely that you use SVG in you React component, that is processed by `url-loader` instead of `svg-react-loader` due to incorrect configuration.
+It's likely that you use SVG in your React component, that is processed by `url-loader` instead of `svg-react-loader` due to incorrect configuration.
 
 ### I get endless spinner (with an infinite loop in the background) in my browser during development
 
