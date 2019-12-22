@@ -1,8 +1,8 @@
 exports.onCreateWebpackConfig = ({
 	stage, actions, getConfig, rules
 }, { rule: ruleProps = {} }) => {
-	const { include, exclude, filters = [], omitKeys, ...otherProps } = ruleProps
-
+	const { include, exclude, filters = [], omitKeys, options = {}, ...otherProps } = ruleProps
+	
 	if([
 		'develop',
 		'develop-html',
@@ -17,7 +17,7 @@ exports.onCreateWebpackConfig = ({
                     if (removals.test(key)) {
                         delete value[key];
                     }
-                 });
+                });
             })
         }
 
@@ -33,7 +33,8 @@ exports.onCreateWebpackConfig = ({
 						use: {
                             loader: 'svg-react-loader',
                             options: {
-                                filters
+																filters,
+																...options
                             }
                         },
 					}
