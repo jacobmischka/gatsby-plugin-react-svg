@@ -33,12 +33,12 @@ The following configuration uses `svg-react-loader` to process SVGs from a path 
 
 ```js
 {
-    resolve: 'gatsby-plugin-react-svg',
-    options: {
-        rule: {
-          include: /assets/
-        }
+  resolve: 'gatsby-plugin-react-svg',
+  options: {
+    rule: {
+      include: /assets/
     }
+  }
 }
 ```
 
@@ -59,12 +59,12 @@ Another common configuration:
 
 ```js
 {
-    resolve: 'gatsby-plugin-react-svg',
-    options: {
-        rule: {
-          include: /\.inline\.svg$/
-        }
+  resolve: 'gatsby-plugin-react-svg',
+  options: {
+    rule: {
+      include: /\.inline\.svg$/
     }
+  }
 }
 ```
 
@@ -84,6 +84,56 @@ In styles file:
 .header-background {
   background-image: url(./path/something.svg);
 }
+```
+
+### SVG-React-Loader options
+
+Any of the svg-react-loader [query parameters](https://github.com/jhamlet/svg-react-loader#query-params) can be passed down via the webpack config by including an `options` prop within the `rule` prop.
+
+```js
+// In your gatsby-config.js
+
+plugins: [
+  {
+    resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /\.inline\.svg$/,
+          options: {
+            tag: "symbol",
+            name: "MyIcon",
+            props: {
+              className: "my-class",
+              title: "example"
+            },
+            filters: [value => console.log(value)]
+          }
+        }
+      }
+  }
+];
+```
+They can also be defined at the import level:
+
+```js
+  import Fork from "-!svg-react-loader?props[]=className:w-4 h-4!../components/Icons/Fork.inline.svg";
+```
+
+### Removing svg props (filters)
+Unwanted SVG props can be removed with filters. Since filters are quite complex this plugin adds a simple key `omitKeys` to allow end users to quickly remove props that are problematic from their svg files.
+
+```js
+{
+  resolve: `gatsby-plugin-react-svg`,
+  options: {
+    rule: {
+      include: /images\/.*\.svg/,
+      omitKeys: ['xmlnsDc', 'xmlnsCc', 'xmlnsRdf', 'xmlnsSvg', 'xmlnsSodipodi', 'xmlnsInkscape']
+      ///OR
+      filters: [(value) => { console.log(value); }]
+    }
+  }
+},
 ```
 
 ## Troubleshooting
