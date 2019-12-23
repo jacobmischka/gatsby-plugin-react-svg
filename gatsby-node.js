@@ -11,7 +11,7 @@ exports.onCreateWebpackConfig = ({
 	].includes(stage)) {
 		if (omitKeys && Array.isArray(omitKeys) && omitKeys.length) {
 				const removals = new RegExp(omitKeys.join('|'), 'i')
-				if (!Array.isArray(option.filters)) {
+				if (!Array.isArray(options.filters)) {
 					options.filters = []
 				}
 				options.filters.push(function(value) {
