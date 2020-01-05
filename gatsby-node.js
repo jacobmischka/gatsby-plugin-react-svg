@@ -1,7 +1,7 @@
 exports.onCreateWebpackConfig = ({
 	stage, actions, getConfig, rules
 }, { rule: ruleProps = {} }) => {
-	const { include, exclude, filters = [], omitKeys, ...otherProps } = ruleProps
+	const { include, exclude, omitKeys, options = {}, ...otherProps } = ruleProps
 
 	if([
 		'develop',
@@ -9,33 +9,33 @@ exports.onCreateWebpackConfig = ({
 		'build-html',
 		'build-javascript'
 	].includes(stage)) {
-        if (omitKeys && Array.isArray(omitKeys) && omitKeys.length) {
-            const removals = new RegExp(omitKeys.join('|'), 'i')
-
-            filters.push(function(value) {
-                Object.keys(value).forEach(function(key) {
-                    if (removals.test(key)) {
-                        delete value[key];
-                    }
-                 });
-            })
-        }
+		if (omitKeys && Array.isArray(omitKeys) && omitKeys.length) {
+				const removals = new RegExp(omitKeys.join('|'), 'i')
+				if (!Array.isArray(options.filters)) {
+					options.filters = []
+				}
+				options.filters.push(function(value) {
+						Object.keys(value).forEach(function(key) {
+								if (removals.test(key)) {
+										delete value[key];
+								}
+						});
+				})
+		}
 
 		// Add the svg-react-loader rule
 		actions.setWebpackConfig({
 			module: {
 				rules: [
 					{
-                        test: /\.svg$/,
-                        include,
-                        exclude,
-                        ...otherProps,
+						test: /\.svg$/,
+						include,
+						exclude,
+						...otherProps,
 						use: {
-                            loader: 'svg-react-loader',
-                            options: {
-                                filters
-                            }
-                        },
+							loader: 'svg-react-loader',
+							options
+						},
 					}
 				],
 			}
