@@ -86,6 +86,19 @@ In styles file:
 }
 ```
 
+## Using with typescript
+
+To use SVGs with Typescript, create a custom type definition like this:
+
+```typescript
+declare module "*.svg" {
+  const content: any;
+  export default content;
+}
+```
+
+Make sure the file is contained in your `tsconfig.json` `include`.
+
 ### SVG-React-Loader options
 
 Any of the svg-react-loader [query parameters](https://github.com/jhamlet/svg-react-loader#query-params) can be passed down via the webpack config by including an `options` prop within the `rule` prop.
