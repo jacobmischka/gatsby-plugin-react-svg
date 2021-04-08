@@ -24,5 +24,8 @@
   "homepage": "https://github.com/jacobmischka/gatsby-plugin-react-svg#readme",
   "dependencies": {
     "svg-react-loader": "^0.4.4"
+  },
+  "peerDependencies": {
+    "gatsby": "^3.0.0 || ^2.0.0"
   }
 }
