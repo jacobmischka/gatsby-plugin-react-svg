@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-react-svg",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Adds svg-react-loader to gatsby webpack config.",
   "main": "gatsby-node.js",
   "repository": {
