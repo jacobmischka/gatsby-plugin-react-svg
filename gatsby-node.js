@@ -33,7 +33,7 @@ exports.onCreateWebpackConfig = ({
 						exclude,
 						...otherProps,
 						use: {
-							loader: 'svg-react-loader',
+							loader: require.resolve('svg-react-loader'),
 							options
 						},
 					}
